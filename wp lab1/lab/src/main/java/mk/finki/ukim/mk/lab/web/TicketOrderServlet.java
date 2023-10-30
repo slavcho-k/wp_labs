@@ -29,6 +29,7 @@ public class TicketOrderServlet extends HttpServlet {
         context.setVariable("movieTitle", req.getParameter("title"));
         context.setVariable("numOfTickets", req.getParameter("tickets"));
         context.setVariable("ipAddr", req.getRemoteAddr());
+        context.setVariable("user", req.getLocalName());
 
         springTemplateEngine.process("orderConfirmation.html", context, resp.getWriter());
     }

@@ -27,9 +27,14 @@ public class MovieServlet extends HttpServlet {
                 .buildExchange(req, resp);
 
         WebContext webContext = new WebContext(webExchange);
-        if (req.getParameter("title") == null || req.getParameter("rating") == null) {
+
+        System.out.println("title" + req.getParameter("title"));
+        System.out.println("rating" + req.getParameter("rating"));
+        if (req.getParameter("title") == null && req.getParameter("rating") == null) {
+            System.out.println("VLEZE");
             webContext.setVariable("movies", movieService.listAll());
         } else {
+            System.out.println("VLEZE2");
             webContext.setVariable("movies", movieService.searchMovies(req.getParameter("title"), Long.valueOf(req.getParameter("rating"))));
         }
 
@@ -40,6 +45,10 @@ public class MovieServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String movieTitle = req.getParameter("movieTitle");
         long numOfTickets = Long.parseLong(req.getParameter("numTickets"));
+
+        if (movieTitle == null) {
+            throw new ServletException("Movie title is required.");
+        }
 
         resp.sendRedirect("/ticketOrder?title=" + movieTitle + "&tickets=" + numOfTickets);
     }

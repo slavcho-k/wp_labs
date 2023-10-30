@@ -9,13 +9,21 @@ import java.util.List;
 @Repository
 public class MovieRepository {
 
-    public List<Movie> findall() {
+    public List<Movie> findAll() {
         return DataHolder.movieList;
     }
 
     public List<Movie> searchMovies(String text, Long rating) {
         return DataHolder.movieList.stream()
-                .filter(m -> m.getTitle().contains(text) && m.getRating() >= rating)
+                .filter(m -> {
+                    if (text != null && rating != null) {
+                        return m.getTitle().toLowerCase().contains(text.toLowerCase()) && m.getRating() >= rating;
+                    } else if (text != null) {
+                        return m.getTitle().toLowerCase().contains(text.toLowerCase());
+                    } else {
+                        return m.getRating() >= rating;
+                    }
+                })
                 .toList();
     }
 }
