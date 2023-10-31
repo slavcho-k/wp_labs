@@ -28,13 +28,13 @@ public class MovieServlet extends HttpServlet {
 
         WebContext webContext = new WebContext(webExchange);
 
-        System.out.println("title" + req.getParameter("title"));
-        System.out.println("rating" + req.getParameter("rating"));
+        if(req.getParameter("titleToRate") != null && req.getParameter("movieRating") != null) {
+            movieService.updateMovieRating(req.getParameter("titleToRate"), Long.valueOf(req.getParameter("movieRating")));
+        }
+
         if (req.getParameter("title") == null && req.getParameter("rating") == null) {
-            System.out.println("VLEZE");
             webContext.setVariable("movies", movieService.listAll());
         } else {
-            System.out.println("VLEZE2");
             webContext.setVariable("movies", movieService.searchMovies(req.getParameter("title"), Long.valueOf(req.getParameter("rating"))));
         }
 

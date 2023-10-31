@@ -5,6 +5,7 @@ import mk.finki.ukim.mk.lab.model.Movie;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MovieRepository {
@@ -25,5 +26,23 @@ public class MovieRepository {
                     }
                 })
                 .toList();
+    }
+
+    public Optional<Movie> getMovieByTitle(String title) {
+        return DataHolder.movieList.stream()
+                .filter(m -> m.getTitle().equalsIgnoreCase(title))
+                .findFirst();
+    }
+
+    public void addMovie(Movie movie) {
+        DataHolder.movieList.add(movie);
+    }
+
+    public void deleteMovieByName(String title) {
+        Optional<Movie> movie = DataHolder.movieList.stream()
+                .filter(m -> m.getTitle().equalsIgnoreCase(title))
+                .findFirst();
+
+        movie.ifPresent(value -> DataHolder.movieList.remove(value));
     }
 }
