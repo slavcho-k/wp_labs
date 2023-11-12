@@ -1,0 +1,38 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Ordered Ticket - Confirmation</title>
+    <link rel="stylesheet" type="text/css" href="/css/ticketOrder.css">
+</head>
+<body>
+<section>
+    <header>
+        <h1>Movie Order page - Order confirmation </h1>
+    </header>
+    <table>
+        <tr>
+            <th colspan="2">
+                Your Order Status
+            </th>
+        </tr>
+        <tr>
+            <td><b>Client Name </b></td>
+            <td th:text="${user}"></td>
+        </tr>
+        <tr>
+            <td><b>Client IP Address</b></td>
+            <td th:text="${ipAddr}"></td>
+        </tr>
+        <tr>
+            <td><b>Ticket for Movie</b></td>
+            <td th:text="${movieTitle}"></td>
+        </tr>
+        <tr>
+            <td><b>Number of tickets</b></td>
+            <td th:text="${numOfTickets}"></td>
+        </tr>
+    </table>
+</section>
+</body>
+</html>
