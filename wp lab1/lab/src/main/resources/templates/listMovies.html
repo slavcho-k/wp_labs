@@ -41,7 +41,7 @@
                 </th:block>
 
                 <th:block>
-                    <a th:href="@{'/movies/delete/{id}' (id=*{movie.getId()})}">
+                    <a th:href="@{'/movies/delete/{id}' (id=${movie.getId()})}">
                         Delete
                     </a>
                 </th:block>
