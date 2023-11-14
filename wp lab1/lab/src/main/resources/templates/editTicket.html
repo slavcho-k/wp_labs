@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Ticket</title>
+    <link rel="stylesheet" type="text/css" href="/css/addMovie.css">
+</head>
+<body>
+
+<form th:action="@{'/ticketOrder/edit-ticket/{id}' (id=${id})}" method="post">
+    <label for="id">Id: </label>
+    <input type="text" id="id" name="id"
+           th:value="(${id} != null ? ${id} : '')"/>>
+    <label for="client">Client:</label>
+    <input type="text" id="client" name="client" required
+           th:value="(${ticket} != null ? ${ticket.getClient()} : '')"/>
+
+    <label for="movieTitle">Movie title:</label>
+    <input type="text" id="movieTitle" name="movieTitle" required
+           th:value="(${ticket} != null ? ${ticket.getMovieTitle()} : '')"/>
+
+    <label for="tickets">Num of tickets: </label>
+    <input type="text" id="tickets" name="tickets" required
+           th:value="(${ticket} != null ? ${ticket.getNumOfTickets()} : '')"/>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

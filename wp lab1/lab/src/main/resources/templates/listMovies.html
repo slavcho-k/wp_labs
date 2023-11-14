@@ -28,8 +28,13 @@
             Add movie
         </a>
     </th:block>
+    <th:block>
+        <a th:href="@{'/ticketOrder/all'}">
+            Show all tickets
+        </a>
+    </th:block>
     <h2>Choose movie:</h2>
-    <form th:action="@{'/ticketOrder'}" method="get">
+    <form action="/ticketOrder/add" method="post">
         <ul th:each="movie : ${movies}">
             <li>
                 <input type="radio" name="movieTitle" th:value="${movie.getTitle()}">

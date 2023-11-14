@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Tickets</title>
+</head>
+<body>
+  <h1>List tickets</h1>
+  <ul th:each="ticket : ${tickets}">
+    <li>
+      <span th:text="${ticket.toString()}"></span><br>
+      <th:block>
+        <a th:href="@{'/ticketOrder/edit-ticket/{id}' (id=${ticket.getId()})}">
+          Edit
+        </a>
+      </th:block>
+    </li>
+  </ul>
+</body>
+</html>
