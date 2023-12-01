@@ -1,12 +1,15 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import mk.finki.ukim.mk.lab.model.ShoppingCart;
 import mk.finki.ukim.mk.lab.model.Ticket;
-import mk.finki.ukim.mk.lab.repository.TicketRepository;
+import mk.finki.ukim.mk.lab.repository.jpa.TicketRepository;
 import mk.finki.ukim.mk.lab.service.TicketService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,26 +17,26 @@ public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
 
     @Override
-    public void addTicket(long id, String client, String movieTitle, int numOfTickets) {
-        Ticket ticket = ticketRepository.findById(id);
-        if (ticket != null) {
-            ticketRepository.tickets.remove(ticket);
+    public void addTicket(String movieTitle, int numOfTickets, ShoppingCart shoppingCart, LocalDateTime dateTime) {
+        if (dateTime != null) {
+            ticketRepository.save(new Ticket(movieTitle, numOfTickets, shoppingCart, dateTime));
+        } else {
+            ticketRepository.save(new Ticket(movieTitle, numOfTickets, shoppingCart, null));
         }
-        ticketRepository.addTicket(new Ticket(client, movieTitle, numOfTickets));
-        System.out.println(ticketRepository.findAll());
     }
 
     @Override
     public List<Ticket> findAll() {
-        return ticketRepository.findAll();
+        return ticketRepository.findAll().stream().toList();
     }
 
     @Override
     public Ticket findById(Long id) {
-        return ticketRepository.findAll()
-                .stream()
-                .filter(t -> t.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        return ticketRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void removeTicket(Long id) {
+        ticketRepository.delete(ticketRepository.findById(id).get());
     }
 }

@@ -9,12 +9,12 @@
 <body>
 
 <form th:action="@{'/ticketOrder/edit-ticket/{id}' (id=${id})}" method="post">
-    <label for="id">Id: </label>
-    <input type="text" id="id" name="id"
-           th:value="(${id} != null ? ${id} : '')"/>>
+<!--    <label for="id">Id: </label>-->
+<!--    <input type="text" id="id" name="id"-->
+<!--           th:value="(${id} != null ? ${id} : '')"/>>-->
     <label for="client">Client:</label>
     <input type="text" id="client" name="client" required
-           th:value="(${ticket} != null ? ${ticket.getClient()} : '')"/>
+           th:value="(${ticket} != null ? ${user.getUsername()} : '')"/>
 
     <label for="movieTitle">Movie title:</label>
     <input type="text" id="movieTitle" name="movieTitle" required
@@ -22,7 +22,7 @@
 
     <label for="tickets">Num of tickets: </label>
     <input type="text" id="tickets" name="tickets" required
-           th:value="(${ticket} != null ? ${ticket.getNumOfTickets()} : '')"/>
+           th:value="(${ticket} != null ? ${ticket.getNumberOfTickets()} : '')"/>
 
     <button type="submit">Submit</button>
 </form>

@@ -40,6 +40,7 @@
                 <input type="radio" name="movieTitle" th:value="${movie.getTitle()}">
                 <span th:text="${movie.toString()}"></span><br>
                 <th:block>
+                    <!--                    sekogas link e get metod-->
                     <a th:href="@{'/movies/edit/{id}' (id=${movie.getId()})}">
                         Edit
                     </a>
@@ -55,6 +56,7 @@
         <h2>Choose number of tickets:</h2>
         <input type="number" name="numTickets" min="1" max="10" value="1"><br/>
         <br/>
+        <input type="datetime-local" id="dateCreated" name="dateCreated"/>
         <input type="submit" value="Submit">
     </form>
 </main>
