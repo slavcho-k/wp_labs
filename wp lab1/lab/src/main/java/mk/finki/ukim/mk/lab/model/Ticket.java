@@ -38,6 +38,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return String.format("User: %s Movie: %s Tickets: %s", shoppingCart.getUser().getUsername(), movieTitle, numberOfTickets);
+        return String.format("User: %s Movie: %s Tickets: %s", shoppingCart.getUser().getPersonName().getName(), movieTitle, numberOfTickets);
     }
 }

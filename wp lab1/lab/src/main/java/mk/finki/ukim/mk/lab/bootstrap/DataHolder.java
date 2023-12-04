@@ -2,10 +2,7 @@ package mk.finki.ukim.mk.lab.bootstrap;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import mk.finki.ukim.mk.lab.model.Movie;
-import mk.finki.ukim.mk.lab.model.Production;
-import mk.finki.ukim.mk.lab.model.ShoppingCart;
-import mk.finki.ukim.mk.lab.model.User;
+import mk.finki.ukim.mk.lab.model.*;
 import mk.finki.ukim.mk.lab.repository.jpa.MovieRepository;
 import mk.finki.ukim.mk.lab.repository.jpa.ProductionRepository;
 import mk.finki.ukim.mk.lab.repository.jpa.ShoppingCartRepository;
@@ -25,8 +22,10 @@ public class DataHolder {
     @PostConstruct
     public void init() {
         if (userRepository.findAll().size() == 0) {
-            userRepository.save(new User("slavcho", "karafilovski", "password", LocalDate.of(2002, 10, 3)));
-            User user = userRepository.findUserByUsername("slavcho").get();
+            PersonName personName = new PersonName("slavcho", "karafilovski");
+            userRepository.save(new User(personName, "password", LocalDate.of(2002, 10, 3)));
+            User user = userRepository.findAll().stream()
+                    .filter(u -> u.getPersonName().getName().equals("slavcho")).findFirst().get();
             shoppingCartRepository.save(new ShoppingCart(user));
         }
 

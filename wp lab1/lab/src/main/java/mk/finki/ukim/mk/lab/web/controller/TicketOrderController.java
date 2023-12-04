@@ -30,6 +30,7 @@ public class TicketOrderController {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime
     ) {
         User user = userService.findUserByUsername("slavcho");
+        if(dateTime == null) dateTime = LocalDateTime.now();
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(user.getId());
         ticketService.addTicket(movieTitle, numTickets, shoppingCart, dateTime);
         return "redirect:/ticketOrder?movieTitle=" + movieTitle + "&numTickets=" +
@@ -50,7 +51,7 @@ public class TicketOrderController {
             Model model
     ) {
         User user = userService.findUserByUsername("slavcho");
-        model.addAttribute("user", user.getUsername());
+        model.addAttribute("user", user.getPersonName().getName());
         model.addAttribute("ipAddr", request.getRemoteAddr());
         model.addAttribute("movieTitle", movieTitle);
         model.addAttribute("numOfTickets", numTickets);
