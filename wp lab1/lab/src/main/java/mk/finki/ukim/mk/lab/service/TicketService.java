@@ -16,4 +16,6 @@ public interface TicketService {
     Ticket findById(Long id);
 
     void removeTicket(Long id);
+
+    void makeDuplicate(Long id);
 }

@@ -30,7 +30,7 @@ public class TicketOrderController {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime
     ) {
         User user = userService.findUserByUsername("slavcho");
-        if(dateTime == null) dateTime = LocalDateTime.now();
+        if (dateTime == null) dateTime = LocalDateTime.now();
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(user.getId());
         ticketService.addTicket(movieTitle, numTickets, shoppingCart, dateTime);
         return "redirect:/ticketOrder?movieTitle=" + movieTitle + "&numTickets=" +
@@ -77,6 +77,12 @@ public class TicketOrderController {
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(user.getId());
         ticketService.removeTicket((long) id);
         ticketService.addTicket(movieTitle, tickets, shoppingCart, null);
+        return "redirect:/ticketOrder/all";
+    }
+
+    @GetMapping("/duplicate/{id}")
+    public String duplicateTicket(@PathVariable Long id) {
+        ticketService.makeDuplicate(id);
         return "redirect:/ticketOrder/all";
     }
 }

@@ -39,4 +39,15 @@ public class TicketServiceImpl implements TicketService {
     public void removeTicket(Long id) {
         ticketRepository.delete(ticketRepository.findById(id).get());
     }
+
+    @Override
+    public void makeDuplicate(Long id) {
+        Optional<Ticket> ticketOptional = ticketRepository.findById(id);
+
+        ticketOptional.ifPresent(ticket -> ticketRepository.save(new Ticket(
+                "Duplicate of " + ticket.getMovieTitle(),
+                ticket.getNumberOfTickets(),
+                ticket.getShoppingCart(),
+                LocalDateTime.now())));
+    }
 }

@@ -16,6 +16,11 @@
                 Edit
             </a>
         </th:block>
+        <th:block>
+            <a th:href="@{'/ticketOrder/duplicate/{id}' (id=${ticket.getId()})}">
+                Duplicate
+            </a>
+        </th:block>
     </li>
 </ul>
 </body>
